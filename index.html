@@ -11,7 +11,7 @@ text {
 }
 
 text.parent {
-  fill: #1f77b4;
+  fill: #0021ff;
   font-weight: bold;
 }
 
@@ -22,14 +22,14 @@ circle {
 }
 
 circle.parent {
-  fill: #1f77b4;
-  fill-opacity: .1;
-  stroke: steelblue;
+  fill: #429b34;
+  fill-opacity: .3;
+  stroke: #595b53;
 }
 
 circle.parent:hover {
   stroke: #ff7f0e;
-  stroke-width: .5px;
+  stroke-width: 2px;
 }
 
 circle.child {
@@ -54,11 +54,12 @@ var w = 1280,
     y = d3.scale.linear().range([0, r]),
     node,
     root;
+   
 
 var pack = d3.layout.pack()
     .size([r, r])
     .value(function(d) { return d.size; })
-
+ console.log(r);
 var vis = d3.select("body").insert("svg:svg", "h2")
     .attr("width", w)
     .attr("height", h)
@@ -92,6 +93,10 @@ d3.json("area.json", function(data) {
 
   d3.select(window).on("click", function() { zoom(root); });
 });
+
+
+  vis.append("title")
+      .text(function(d) { return d.data.id + "\n" + format(d.value); });
 
 function zoom(d, i) {
   var k = r / d.r / 2;
